@@ -52,6 +52,9 @@ grep -RPn "(passthru|shell_exec|system|phpinfo|base64_decode|chmod|mkdir|fopen|f
 grep -RPn "(passthru|shell_exec|system|phpinfo|base64_decode|chmod|mkdir|fopen|fclose|fclose|readfile) *\(" /var/www/ > $dir/22.Backdoor-VarWWWdir.txt
 echo "Finish Searching.\n"
 
+# List USER SUDO
+for i in `cat /etc/passwd | grep bash | awk -F: '{print $1}'`; do echo "AKSES SUDO USER $i"; sudo -l -U $i; echo ""; done > $dir/23.Sudo.txt
+
 # Create Compressed File
 tar -czf debian-based-IR.tar.gz debian-based-IR
 rm -rf debian-based-IR
